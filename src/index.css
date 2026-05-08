@@ -286,6 +286,56 @@ input {
     linear-gradient(135deg, #fbf7ee 0%, #edf4eb 100%);
 }
 
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(4, 24, 17, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.video-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 980px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: #061f17;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(6, 63, 45, 0.82);
+  color: white;
+}
+
+.video-modal-player {
+  display: block;
+  width: 100%;
+  max-height: min(78vh, 620px);
+  background: #061f17;
+}
+
 @media (max-width: 1279px) {
   .hero-image {
     right: 0;

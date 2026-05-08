@@ -6,6 +6,7 @@ import {
   BookOpen,
   CalendarCheck,
   Check,
+  X,
   ClipboardCheck,
   Droplets,
   Facebook,
@@ -158,7 +159,7 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ onWatchVideo }) {
   return (
     <section className="hero-band relative overflow-hidden bg-cream pt-28 lg:pt-24">
       <div className="page-shell grid items-center gap-6 lg:grid-cols-[43fr_57fr]">
@@ -188,7 +189,11 @@ function Hero() {
           </div>
           <div className="mt-7 flex flex-wrap items-center gap-5">
             <button className="btn btn-primary h-12 min-w-40 text-base">Join for Free</button>
-            <button className="inline-flex h-12 items-center gap-3 rounded px-1 text-[0.95rem] font-medium text-ink">
+            <button
+              className="inline-flex h-12 items-center gap-3 rounded px-1 text-[0.95rem] font-medium text-ink"
+              onClick={onWatchVideo}
+              type="button"
+            >
               <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-forest text-forest">
                 <Play size={16} fill="currentColor" />
               </span>
@@ -218,6 +223,22 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function VideoModal({ isOpen, onClose }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="video-modal" role="dialog" aria-modal="true" aria-label="Afiya Health video">
+      <button className="video-modal-backdrop" type="button" onClick={onClose} aria-label="Close video" />
+      <div className="video-modal-panel">
+        <button className="video-modal-close" type="button" onClick={onClose} aria-label="Close video">
+          <X size={22} />
+        </button>
+        <video className="video-modal-player" src="/assets/afiya-video.mp4" controls autoPlay playsInline />
+      </div>
+    </div>
   );
 }
 
@@ -463,10 +484,12 @@ function Footer() {
 }
 
 function App() {
+  const [isVideoOpen, setIsVideoOpen] = React.useState(false);
+
   return (
     <div className="min-h-screen bg-cream text-ink">
       <Header />
-      <Hero />
+      <Hero onWatchVideo={() => setIsVideoOpen(true)} />
       <FeatureCards />
       <main className="page-shell grid gap-6 py-6">
         <section className="conversion-grid">
@@ -480,6 +503,7 @@ function App() {
       </main>
       <CommunityCTA />
       <Footer />
+      <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
     </div>
   );
 }
